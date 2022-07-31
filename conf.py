@@ -24,7 +24,7 @@ templates_path = ['_templates']
 
 language = 'en'
 
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', 'env']
 
 
 # -- Options for HTML output -------------------------------------------------

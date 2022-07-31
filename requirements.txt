@@ -2,3 +2,4 @@ cssselect
 doc2dash
 lxml
 sphinx
+sphobjinv
