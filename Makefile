@@ -12,11 +12,11 @@ BUILDDIR      = _build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-html:
-	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" docs $(SPHINXOPTS) $(O)
-
 clean:
 	rm -rf docs *.docset _autosummary
+
+html: clean
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" docs $(SPHINXOPTS) $(O)
 
 # sphinx generates duplicate index entries, one under the "std:doc" scope and the other under "py:".
 # this results in duplicate "Class" and "Guide" sections in Dash. I can't work out how to tell sphinx to index elements
@@ -25,7 +25,7 @@ fixobjects:
 	sphobjinv convert plain docs/objects.inv - | fgrep -v 'std:doc -1 _autosummary' | sphobjinv convert zlib - objects.inv.new
 	mv objects.inv.new docs/objects.inv
 
-dash: clean html fixobjects
+dash: html fixobjects
 	doc2dash -a -n lxml docs
 
 
